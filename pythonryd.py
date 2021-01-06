@@ -3,7 +3,7 @@ import requests
 import json
 import uuid
 
-data = json.dumps({"email":"customemail","password":"verysecrecpassword"})
+data = json.dumps({"email":"customemail","password":"verysecretpassword!"})
 # copied from https://github.com/NemoN/ioBroker.ryd/blob/master/io-package.json
 ryd_api_server = 'url'
 ryd_app_version = "2.52.4(201008000)"
@@ -35,18 +35,13 @@ headers = {
 
 response = requests.post(ryd_api_server+"/auth%2Flogin%2Flocal", data=data,
                          headers=headers, timeout=2000)
-#print(response.status_code)
-#print(response.text)
 json_object = json.loads(response.text)
-#http://thinxcloud.de/things/id/status?auth_token=token
+
 ryd_auth_token=json_object["auth_token"]
 rydid = json_object["things"][0]["id"]
-#print(ryd_auth_token)
-#print(rydid)
 
 response = requests.get(ryd_api_server + "/things/" + rydid + "/status?auth_token=" + ryd_auth_token,
                          headers=headers, timeout=2000) 
-print(response.text)
 json_data = json.loads(response.text)
 data=json_data["data"]
 fuel=data["fuelType"]
