@@ -25,7 +25,7 @@ setup(
     py_modules=['pyryd'],
     packages=find_packages(),
     package_data={'': ['*.html', '*.htm']},
-    install_requires=['json', 'requests','uuid'],
+    install_requires=['requests'],
     long_description=long_description,
     long_description_content_type='text/markdown',
     license=pyryd.__license__,
