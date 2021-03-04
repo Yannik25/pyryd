@@ -89,7 +89,7 @@ class Ryd(object):
         rydid = json_object["things"][0]["id"]
 
         response = requests.get(
-            "{}/things/{}/status?auth_token=".format(
+            "{}/things/{}/status?auth_token={}".format(
                 self._ryd_api_server,
                 rydid,
                 ryd_auth_token,
