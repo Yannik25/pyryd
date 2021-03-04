@@ -2,7 +2,24 @@
 import requests
 import json
 import uuid
+import datetime
 
+RYD_DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
+
+def ryd_time(s: str):
+    return datetime.datetime.strptime(s, RYD_DATETIME_FORMAT)
+
+# Dict for refactoring entries of the returned data to
+# a value and a unit
+REFACTOR_DICT = {
+    "fuel_type": (lambda x: x["fuelType"], None),
+    "examination_date": (lambda x: ryd_time(x["examinationDate"]), None),
+    "last_fuel_top_up": (lambda x: ryd_time(x["lastFuelTopUpTimestamp"]), None),
+    "battery_level_mv": (lambda x: int(x["batteryLevelMV"]), "MV"),
+    "battery_level_p": (lambda x: int(x["batteryLevelPercent"]), "%"),
+    "overall_distance": (lambda x: int(x["carOdometer"]["distanceM"]), "m")
+
+}
 
 class Ryd(object):
     def __init__(
@@ -83,3 +100,12 @@ class Ryd(object):
         json_data = response.json()
 
         self._raw_data = json_data["data"]
+        self._ref_data = self._refactored_data(self._raw_data)
+
+    @staticmethod
+    def _refactored_data(data: dict):
+        """ Returns a refactored version of the raw data returned by fetching """
+        return {
+            key: {"value": val(data), "unit": uni}
+            for key, (val, uni) in REFACTOR_DICT.items()
+        }
