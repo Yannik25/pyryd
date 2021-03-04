@@ -1,85 +1,18 @@
-# This Python file uses the following encoding: utf-8
-import requests
-import json
-import uuid
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
+import warnings
 
-class Ryd(object):
-    def __init__(
-        self,
-        ryd_api_server: str,
-        user_email: str,
-        user_passwd: str,
-        ryd_app_version="2.52.4(201008000)",
-        client_device_version="9.0.0",
-        client_device_resolution="2960x1440",
-        client_device_id="SM-G960F",
-        client_device_type="Android",
-        think_properties="curLocation,parkingLocation,carOdometer,estimates,reportedFuelTotal,fuel",
-        think_properties_ignore="recurrences,openDtcs,score",
-        ryd_app_locale="de-de",
-        ryd_app_internal_name="TankTaler",
-    ):
-        self._ryd_api_server = ryd_api_server
-        self._user_email = user_email
-        self._user_passwd = user_passwd
-        self._ryd_app_version = ryd_app_version
-        self._client_device_version = client_device_version
-        self._client_device_resolution = client_device_resolution
-        self._client_device_id = client_device_id
-        self._client_device_type = client_device_type
-        self._think_properties = think_properties
-        self._think_properties_ignore = think_properties_ignore
-        self._ryd_app_locale = ryd_app_locale
-        self._ryd_app_internal_name = ryd_app_internal_name
-        self._raw_data = {}
-        self._ryd_app_platform = "{} [{},{},{}]".format(
-            client_device_type,
-            client_device_id,
-            client_device_version,
-            client_device_resolution,
-        )
-        self._ryd_app_user_agent = "{}/{}({};{} {})".format(
-            ryd_app_internal_name,
-            ryd_app_version,
-            client_device_id,
-            client_device_type,
-            client_device_version,
-        )
-        self._headers = {
-            "x-txn-platform": self._ryd_app_platform,
-            "Cache-Control": "no-cache, no-store, must-revalidate",
-            "Pragma": "no-cache",
-            "Expires": str(0),
-            "x-txn-app-version": ryd_app_version,
-            "User-agent": self._ryd_app_user_agent,
-            "X-Txn-Request-Id": str(uuid.uuid4()),
-            "X-Txn-Locale": ryd_app_locale,
-            "Content-Type": "application/json; charset=utf-8",
-        }
-        self._data = json.dumps({"email": user_email, "password": user_passwd})
+try:
+    from .pyryd import Ryd
+except ImportError as e:
+    warnings.warn(ImportWarning(e))
 
-    def fetch(self):
-        response = requests.post(
-            "{}/auth%2Flogin%2Flocal".format(self._ryd_api_server),
-            data=self._data,
-            headers=self._headers,
-            timeout=2000,
-        )
-        json_object = response.json()
+VERSION = (0, 1, 0)
 
-        ryd_auth_token = json_object["auth_token"]
-        rydid = json_object["things"][0]["id"]
-
-        response = requests.get(
-            "{}/things/{}/status?auth_token=".format(
-                self._ryd_api_server,
-                rydid,
-                ryd_auth_token,
-            ),
-            headers=self._headers,
-            timeout=2000,
-        )
-        json_data = response.json()
-
-        self._raw_data = json_data["data"]
+__version__ = '.'.join([str(i) for i in VERSION])
+__author__ = 'Yannik25'
+__author_email__ = 'yannik92@me.com'
+__copyright__ = 'Copyright (C) 2021 Yannik25'
+__license__ = "MIT"
+__url__ = "https://github.com/Yannik25/pyryd"
