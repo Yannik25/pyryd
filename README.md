@@ -8,15 +8,22 @@ Also thanks to [@nielstron](https://github.com/nielstron) for his constant help
 
 python variant to read data from ryd (formaly Tanktaler)
 
-#Install via:
+# Installation
+
+```bash
 pip install PyRYD
+```
+For developers, clone this repository and run the following command in the repository root:
 
-In example.py enter the api_url, email and your password.
-
-To run the example.py file first run following command:
+```bash
 pip install -e .
+```
 
-then:
+# Demo
+
+In `example.py` enter the api_url, email and your password, then run
+```bash
 python3 example.py
+```
 
-An sample output can be seen in /pyryd/sample.json
+An sample output can be found in `/pyryd/sample.json`.
