@@ -17,6 +17,7 @@ REFACTOR_DICT = {
     "last_fuel_top_up": (lambda x: ryd_time(x["lastFuelTopUpTimestamp"]), None),
     "battery_voltage": (lambda x: float(x["batteryLevelMV"])/1000, "V"),
     "battery_percentage": (lambda x: float(x["batteryLevelPercent"]), "%"),
+    "battery_health": (lambda x: string(x["batteryLevelPercent"]), None),
     "overall_distance": (lambda x: int(x["carOdometer"]["distanceM"])/1000, "km"),
     "fuel_level": (lambda x: float(x["level"]["OBD_FUELLEVEL"]["l"]), "l"),
     "fuel_percent": (lambda x: float(x["level"]["OBD_FUELLEVEL"]["percent"]), "%"),
