@@ -105,10 +105,13 @@ class Ryd(object):
     @staticmethod
     def _refactored_data(data: dict):
         """ Returns a refactored version of the raw data returned by fetching """
-        return {
-            key: {"value": val(data), "unit": uni}
-            for key, (val, uni) in REFACTOR_DICT.items()
-        }
+        result = {}
+        for key, (val, uni) in REFACTOR_DICT.items():
+            try:
+                result[key] = {"value": val(data), "unit": uni}
+            except (KeyError, TypeError):
+                continue
+        return result
 
     def refactored_data(self):
         return self._ref_data
