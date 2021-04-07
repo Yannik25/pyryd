@@ -19,8 +19,8 @@ REFACTOR_DICT = {
     "battery_percentage": (lambda x: float(x["batteryLevelPercent"]), "%"),
     "battery_health": (lambda x: str(x["batteryHealth"]), None),
     "overall_distance": (lambda x: int(x["carOdometer"]["distanceM"])/1000, "km"),
-    "fuel_level": (lambda x: float(x["level"]["OBD_FUELLEVEL"]["l"]), "l"),
-    "fuel_percent": (lambda x: float(x["level"]["OBD_FUELLEVEL"]["percent"]), "%"),
+    "fuel_level": (lambda x: float(x["fuel"]["level"]["OBD_FUELLEVEL"]["l"]), "l"),
+    "fuel_percent": (lambda x: float(x["fuel"]["level"]["OBD_FUELLEVEL"]["percent"]), "%"),
 
 }
 
