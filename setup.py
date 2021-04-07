@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import setuptools
 
 from setuptools import setup, find_packages
 
@@ -16,7 +15,7 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-setuptools.setup(
+setup(
     name='PyRYD',
     version=pyryd.__version__,
     description='python variant to read data from RYD (previously known as TankTaler) ODB2 Adapter',

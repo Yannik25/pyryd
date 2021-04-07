@@ -109,3 +109,9 @@ class Ryd(object):
             key: {"value": val(data), "unit": uni}
             for key, (val, uni) in REFACTOR_DICT.items()
         }
+
+    def refactored_data(self):
+        return self._ref_data
+
+    def raw_data(self):
+        return self._raw_data
