@@ -21,7 +21,14 @@ REFACTOR_DICT = {
     "overall_distance": (lambda x: int(x["carOdometer"]["distanceM"])/1000, "km"),
     "fuel_level": (lambda x: float(x["fuel"]["level"]["OBD_FUELLEVEL"]["l"]), "l"),
     "fuel_percent": (lambda x: float(x["fuel"]["level"]["OBD_FUELLEVEL"]["percent"]), "%"),
-
+    "fuel_level_user": (lambda x: float(x["fuel"]["level"]["USER"]["l"]), "l"),
+    "fuel_percent_user": (lambda x: float(x["fuel"]["level"]["USER"]["percent"]), "%"),
+    "fuel_level_measure": (lambda x: float(x["fuel"]["level"]["MEAS"]["l"]), "l"),
+    "fuel_percent_measure": (lambda x: float(x["fuel"]["level"]["MEAS"]["percent"]), "%"),
+    "fuel_total": (lambda x: float(x["fuel"]["reportedFuelTotal"]["fuelL"]), "l"),
+    "car_status": (lambda x: str(x["state"]), None),
+    "parking_Location": (lambda x: str(x["parkingLocation"]["addressString"]), None),
+    "license_Plate": (lambda x: str(x["licensePlate"]), None),
 }
 
 class Ryd(object):
