@@ -29,8 +29,8 @@ REFACTOR_DICT = {
     "car_status": (lambda x: str(x["state"]), None),
     "parking_Location": (lambda x: str(x["parkingLocation"]["addressString"]), None),
     "current_Location": (lambda x: list(x["curLocation"]["loc"]), None),
-    "current_Latitude": (lambda x: float(x["curLocation"]["loc"][0]), None),
-    "current_Longitude": (lambda x: float(x["curLocation"]["loc"][1]), None),
+    "current_Latitude": (lambda x: float(x["curLocation"]["loc"][1]), None),
+    "current_Longitude": (lambda x: float(x["curLocation"]["loc"][0]), None),
     "license_Plate": (lambda x: str(x["licensePlate"]), None),
 }
 
