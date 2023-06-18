@@ -91,7 +91,7 @@ class Ryd(object):
 
     def fetch(self):
         response = requests.post(
-            "{}/auth%2Flogin%2Flocal".format(self._ryd_api_server),
+            "{}/auth/login/local".format(self._ryd_api_server),
             data=self._data,
             headers=self._headers,
             timeout=2000,
