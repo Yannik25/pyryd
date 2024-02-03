@@ -1,3 +1,6 @@
+# Repo will be archived on 30.04. as RYD will stop supporting the OBD adapter:
+# [Bye Bye ryd box](https://www.ryd.one/de/ryd-box/)
+
 # pyryd
 
 Still work in progress
